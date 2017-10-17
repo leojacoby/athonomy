@@ -12,7 +12,7 @@ var connect = process.env.MONGODB_URI;
 
 var REQUIRED_ENV = "SECRET MONGODB_URI".split(" ");
 
-REQUIRED_ENV.forEach(function(el) {
+REQUIRED_ENV.forEach(el => {
   if (!process.env[el]){
     console.error("Missing required env var " + el);
     process.exit(1);
@@ -53,16 +53,16 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser(function(user, done) {
+passport.serializeUser((user, done) => {
   done(null, user._id);
 });
 
-passport.deserializeUser(function(id, done) {
+passport.deserializeUser((id, done) => {
   models.User.findById(id, done);
 });
 
 // passport strategy
-passport.use(new LocalStrategy(function(username, password, done) {
+passport.use(new LocalStrategy((username, password, done) => {
   // Find the user with the given username
   models.User.findOne({ username: username }, function (err, user) {
     // if there's an error, finish trying to authenticate (auth failed)
@@ -88,7 +88,7 @@ app.use('/', auth(passport));
 app.use('/', routes);
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use((req, res, next) => {
   var err = new Error('Not Found');
   err.status = 404;
   next(err);
@@ -99,7 +99,7 @@ app.use(function(req, res, next) {
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
-  app.use(function(err, req, res, next) {
+  app.use((err, req, res, next) => {
     res.status(err.status || 500);
     res.render('error', {
       message: err.message,
@@ -110,7 +110,7 @@ if (app.get('env') === 'development') {
 
 // production error handler
 // no stacktraces leaked to user
-app.use(function(err, req, res, next) {
+app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,

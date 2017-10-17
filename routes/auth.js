@@ -19,6 +19,8 @@ module.exports = function(passport) {
     }
     var u = new models.User({
       username: req.body.username,
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
       password: req.body.password
     });
     u.save(function(err, user) {
@@ -39,7 +41,7 @@ module.exports = function(passport) {
 
   // POST Login page
   router.post('/login', passport.authenticate('local',{
-    successRedirect: '/protected',
+    successRedirect: '/',
     failureRedirect: '/login'
   }));
 
