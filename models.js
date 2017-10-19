@@ -8,8 +8,21 @@ const userSchema = new Schema({
     lastName: {type: String, required: true},
 });
 
+const eventSchema = new Schema({
+  name: {type: String, required: true},
+  organizer: {type: String, required: true},
+  date: {type: Date, required: true},
+  location: {type: String, required: true},
+  description: {type: String, required: true},
+  cause: {type: String, required: true},
+  private: {type: Boolean, required: true}
+})
+
 const User = mongoose.model('User', userSchema);
 
+const Event = mongoose.model('Event', eventSchema);
+
 module.exports = {
-    User: User
+    User: User,
+    Event: Event
 };
