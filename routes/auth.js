@@ -36,14 +36,24 @@ module.exports = function(passport) {
 
   // GET Login page
   router.get('/login', function(req, res) {
-    res.render('login');
+    var endpoint = req.query.endpoint || "";
+    if (endpoint.length) {
+      var action = "/login/?endpoint="+endpoint;
+    } else {
+      var action = "/login";
+    }
+    res.render('login', {
+      formAction: action
+    });
   });
 
   // POST Login page
-  router.post('/login', passport.authenticate('local',{
-    successRedirect: '/',
-    failureRedirect: '/login'
-  }));
+  router.post('/login', (req, res) => {
+    passport.authenticate('local', {
+      successRedirect: '/'+req.query.endpoint,
+      failureRedirect: '/login'
+    })(req, res);
+  });
 
   // GET Logout page
   router.get('/logout', function(req, res) {

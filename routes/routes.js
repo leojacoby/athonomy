@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
 
 router.use((req, res, next) => {
   if (!req.user) {
-    res.redirect('/login');
+    res.redirect('/login?endpoint='+req.originalUrl.slice(1));
   } else {
     return next();
   }
@@ -30,7 +30,7 @@ router.get('/newevent', (req, res, next) => {
 });
 
 router.post('/newevent', (req, res, next) => {
-  let {name, organizer, date, location, description, cause, private} = req.body;
+  let {name, organizer, date, location, description, cause, private, measurement} = req.body;
   if (private === "true") {
     private = true;
   } else {
@@ -43,14 +43,15 @@ router.post('/newevent', (req, res, next) => {
     location,
     description,
     cause,
-    private
-  }).save((err, user) => {
+    private,
+    measurement
+  }).save((err, event) => {
     if (err) {
       console.log("Error saving new event", err);
       res.status(500).redirect('/newevent');
     } else {
       console.log("New event saved!")
-      res.status(200).redirect('/');
+      res.status(200).redirect('/events/'+event._id);
     }
   })
 })

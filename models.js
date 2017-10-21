@@ -15,7 +15,8 @@ const eventSchema = new Schema({
   location: {type: String, required: true},
   description: {type: String, required: true},
   cause: {type: String, required: true},
-  private: {type: Boolean, required: true}
+  private: {type: Boolean, required: true},
+  measurement: {type: String, required: true}
 })
 
 const User = mongoose.model('User', userSchema);
