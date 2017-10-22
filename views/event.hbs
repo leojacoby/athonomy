@@ -1,0 +1,12 @@
+<h1>{{event.name}}</h1>
+<h3>Organized by {{event.organizer}}</h4><br>
+<h5><strong>When: </strong> {{event.datetimeString}}</h5>
+<h5><strong>Where: </strong> {{event.location}}</h5><br>
+<h5><strong>Description</strong></h5>
+<p>{{event.description}}</p><br>
+<h5><strong>Cause</strong></h5>
+<p>{{event.cause}}</p><br>
+<h5>Pledges are measured <strong>{{event.measurement}}</strong>.</h5><br>
+<form action="/joinevent/{{event._id}}" method="post">
+  <input type="submit" name="join" value="Participate!" />
+</form>

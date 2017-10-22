@@ -15,6 +15,7 @@
   <div class="form-group">
     <label>When</label>
     <input type="date" name="date" class="form-control">
+    <input type="time" name="time" class="form-control">
   </div>
   <div class="form-group">
     <label>Where</label>
@@ -22,26 +23,28 @@
   </div>
   <div class="form-group">
     <label>Description</label>
-    <textarea type="text-area" name="description" class="form-control"></textarea>
+    <textarea type="text-area" name="description" class="form-control" placeholder="Describe what will be taking place during the event and how participants can earn pledge points."></textarea>
   </div>
   <div class="form-group">
     <label>Cause</label>
-    <input type="text" name="cause" class="form-control">
-  </div>
+    <textarea type="text-area" name="cause" class="form-control" placeholder="Be detailed and provide a link to the organization! People want to participate in charity events when the destination of the funds raised is super clear."></textarea>
+  </div><br>
   <div class="form-group">
-    <input type="radio" name="private" value="true" checked> <label>Private</label><br>
-    <input type="radio" name="private" value="false"> <label>Public</label><br>
+    <label>
+    <input type="radio" name="private" value="true" checked> <label>Event is private</label><br>
+    <input type="radio" name="private" value="false"> <label>Event is public (anyone can join the event)</label><br>
   </div class="form-group">
   <div class="form-group">
     <label>Measurement of success</label><br>
-    <select name="measurement">
-      <option value="miles">Miles</option>
-      <option value="kilometers">Kilometers</option>
-      <option value="laps">Laps</option>
-      <option value="points">Points</option>
-      <option value="shots">Shots</option>
-      <option value="goals">Goals</option>
-    </select>
+    <input type="text" name="measurement" class="form-control" list="units" placeholder="kilometers, laps, shots, etc.">
+    <datalist id="units">
+      <option value="miles">
+      <option value="kilometers">
+      <option value="laps">
+      <option value="points">
+      <option value="shots">
+      <option value="goals">
+    </datalist>
   </div>
   <div class="form-group">
     <button class="btn btn-success">Create</button>
